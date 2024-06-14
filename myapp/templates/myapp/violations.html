@@ -1,0 +1,69 @@
+{% extends "myapp/base.html" %}
+
+<title>{% block title %} Violations{% endblock %}</title>
+{% load static %}
+{% block content %}
+<body class="goto-here">
+    <div class="container">
+        <div class="row justify-content-center mb-3 pb-3">
+            <div class="col-md-12 heading-section text-center ftco-animate">
+                <h1 class="mb-4">Red Light Violations</h1>
+                <p>Adherence to traffic signals is crucial for the safety of all road users.</p>
+            </div>
+        </div>       
+    </div>
+    <section class="ftco-section bg-light">
+        <div class="container">
+            <div class="row">
+                {% for v in products %}
+                <div class="col-sm col-md-6 col-lg ftco-animate">
+                    <div class="product">
+                        <a href="#" class="img-prod">
+                            <img class="img-fluid" src="{{ v.image.url }}" alt="Image of Violation">
+                            <div class="overlay"></div>
+                        </a>
+                        <div class="text py-3 px-3">
+                            <h3><strong>{{ v.received_at }}</strong></h3>
+                            <p class="bottom-area d-flex px-3">
+                                <a href="#" class="add-to-cart text-center py-2 mr-1" onclick="extractText('{{ v.image.url|escapejs}}','{{ v.id }}')">
+                                    <span>Show vehicle information <i class="ion-ios-add ml-1"></i></span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+        <svg class="circular" width="48px" height="48px">
+            <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+            <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+        </svg>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    function extractText(imageUrl,imageId) {
+        // Construct the full URL
+        const fullImageUrl = window.location.origin + imageUrl;
+        $.ajax({
+            url: '{% url "extract_text" %}',
+            method: 'POST',
+            data: {
+                'image_url': fullImageUrl,
+                'image_id': imageId,
+                'csrfmiddlewaretoken': '{{ csrf_token }}'
+            },
+            success: function(response) {
+                // Redirect to the result page with parameters
+                window.location.href = response.redirect_url;
+            }
+        });
+    }
+</script>
+
+</body>
+{% endblock %}

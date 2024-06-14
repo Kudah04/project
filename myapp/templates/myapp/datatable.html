@@ -1,0 +1,78 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block content %}
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            
+            <!-- /.card -->
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Red Light Running Violations</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th>Violation Number</th>
+                    <th>Plate Number</th>
+                    <th>Driver Name</th>
+                    <th>Date and Time</th>
+                    <th>Driver Address</th>
+                    <th>Car Model</th>
+                    <th>Camera ID</th>
+                    <th>Robot</th>
+                    <th>Latitude</th>
+                    <th>Longitude</th>
+                    <th>Driver's Information Found</th>
+                    
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  {% for image in data %}
+                  <tr>
+                    <td>{{ image.id }}</td>
+                    <td>{{ image.driver.plate }}</td>
+                    <td>{{ image.driver.name }}</td>
+                    <td>{{ image.received_at }}</td>
+                    <td>{{ image.driver.address }}</td>
+                    <td>{{ image.driver.model }}</td>
+                    <td>{{ image.camera_id }}</td>
+                    <td>{{ image.intersection }}</td>
+                    <td>{{ image.latitude }}</td>
+                    <td>{{ image.longitude }}</td>
+                    <td>{{ image.extract_text }}</td>
+                  
+                  </tr>
+                  {% endfor %}
+                   </tbody>
+                </table>   
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div>
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+
+  <!-- /.content-wrapper -->
+ 
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+  
+{% endblock %}
+

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Whole Information</title>
+</head>
+<body>
+    <h1>Driver Information for Plate: {{ extracted_text }}</h1>
+    {% if driver_data %}
+        <p>Name: {{ driver_data.name }}</p>
+        <p>Address: {{ driver_data.address }}</p>
+        <p>Model: {{ driver_data.model }}</p>
+        <p>Date of Image: {{ driver_data.date }}</p>
+    {% else %}
+        <p>No driver information found.</p>
+    {% endif %}
+</body>
+</html>
+

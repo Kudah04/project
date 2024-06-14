@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Result</title>
+</head>
+<body>
+    <h1>Result</h1>
+    <p>Extracted Text: {{ extracted_text }}</p>
+    <p>Data : {{ violation.date }}</p>
+    <h2>Driver Information</h2>
+    {% if driver %}
+    <p>Name: {{ driver.name }}</p>
+    <p>Model: {{ driver.model }}</p>
+    <p>Year: {{ driver.year }}</p>
+    {% else %}
+    <p>No driver information found.</p>
+    {% endif %}
+    <img src="{{ image_url }}" alt="Processed Image" width="300" height="200">
+
+    
+    <a class = "btn btn-primary btn-sm" href = "{% url 'generate-pdf' driver.id %} ">Generate Report</a>
+</body>
+</html>

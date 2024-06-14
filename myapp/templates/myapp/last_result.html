@@ -1,0 +1,26 @@
+{% extends "myapp/base.html" %}
+
+{% load static %}
+{% block content %}
+<body>
+
+            <div class = "container">
+                <h1>Report for vehicle with plate number : {{ extracted_text }}</h1>
+                {% for image in images %} 
+                <p>Violation : {{ image.id }}</p>
+                <p>Plate Number : {{ image.driver.plate }}</p>           
+                <p>Driver Name : {{ image.driver.name }}</p>
+                <p>Date and Time : {{ image.received_at }}</p>
+                <p>Driver Address : {{ image.driver.address }}</p>
+                <p>Driver Model : {{ image.driver.model }}</p>
+                <p>Camera ID : {{ image.camera_id }}</p>
+                <p>Robot : {{ image.intersection }}</p>
+                <p>Latitude : {{ image.latitude }}</p>
+                <p>Longitude : {{ image.longitude }}</p>
+                <p>Image : <img src="{{ image.image.url }}" alt="Image" width="200"></p>
+                {% endfor %}
+
+                </div>
+            
+</body>
+{% endblock %}

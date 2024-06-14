@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% load static %}
+  <title> Log in </title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="{% static 'myapp/plugins/fontawesome-free/css/all.min.css' %}">
+  <!-- icheck bootstrap -->
+  <link rel="stylesheet" href="{% static 'myapp/plugins/icheck-bootstrap/icheck-bootstrap.min.css' %}">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="{% static 'myapp/dist/css/adminlte.min.css' %}">
+</head>
+<body class="hold-transition login-page">
+<div class="login-box">
+  <!-- /.login-logo -->
+  <div class="card card-outline card-primary">
+    
+    <div class="card-body">
+      <p class="login-box-msg"><h4>Vehicle Information</h4></p>
+        {% if extracted_text %}
+            <p>Extracted Plate Text: {{ extracted_text }}</p>
+            {% if driver %}
+                {% for d in driver %}
+                    {% with driver_object=d.fields %}
+                        <p>Name: {{ driver_object.name }}</p>
+                        <p>Model: {{ driver_object.model }}</p>
+                        <p>Year: {{ driver_object.year }}</p>
+                    {% endwith %}
+                {% endfor %}
+            {% else %}
+                <p>No driver information found for this plate.</p>
+            {% endif %}
+        {% else %}
+            <p>No text extracted from the image.</p>
+        {% endif %}
+
+      <!-- /.social-auth-links -->
+    </div>
+    <!-- /.card-body -->
+  </div>
+  <!-- /.card -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery -->
+<script src="{% static 'myapp/plugins/jquery/jquery.min.js' %}"></script>
+<!-- Bootstrap 4 -->
+<script src="{% static 'myapp/plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<!-- AdminLTE App -->
+<script src="{% static 'myapp/dist/js/adminlte.min.js' %}"></script>
+</body>
+</html>
